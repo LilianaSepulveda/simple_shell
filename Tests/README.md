@@ -1,1 +1,1 @@
-# This is jus a test folder
+# This is just a test folder
