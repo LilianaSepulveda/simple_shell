@@ -11,10 +11,15 @@ int main(void)
 	char *chao = "exit\n";
 
 	printf("Use CTRL + D or type 'exit' to exit:\n");
-   	while(chars != EOF)
+   	while(1)
 	{
     	printf("$");
     	chars = getline(&buff,&bufsize,stdin);
+		if (chars == EOF)
+		{
+			printf("Bye!\n");
+			break;
+		}
 		if (!strcmp(chao, buff))
 		{
 			printf("Bye!\n");
