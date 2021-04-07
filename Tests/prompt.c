@@ -5,29 +5,23 @@
 
 int main(void)
 {
-    char *buff = NULL;
-    size_t bufsize = 0;
-    size_t chars = 0;
-	char *chao = "exit\n";
+	char *buff = NULL, *chao = "exit\n", *fork = NULL;
+	size_t bufsize = 0;
+	size_t chars = 0;
 
-	printf("Use CTRL + D or type 'exit' to exit:\n");
-   	while(1)
+	while (chars != EOF)
 	{
-    	printf("$");
-    	chars = getline(&buff,&bufsize,stdin);
+    	write(1, "$", 1);
+    	chars = getline(&buff, &bufsize, stdin);
 		if (chars == EOF)
 		{
-			printf("Bye!\n");
 			break;
 		}
-		if (!strcmp(chao, buff))
+		if (!_strcmp(chao, buff))
 		{
-			printf("Bye!\n");
 			break;
 		}
-		printf("You said: %s",buff);
-    	printf("%zu characters were read.\n",chars);
 	}
 	free(buff);
-    return(0);
+    return (0);
 }
