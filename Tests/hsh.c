@@ -6,10 +6,15 @@
 int main(void)
 {
 	ssize_t chars = 0, buffsize = 0;
-	char *buff = NULL, **command = NULL;
+	char *buff = NULL, **command = NULL, **Path = NULL;
 	struct stat st;
 	pid_t _fork;
 
+	Path = getpath(environ);
+	printf("%s\n", Path[0]);
+	printf("%s\n", Path[1]);
+	printf("%s\n", Path[2]);
+	printf("%s\n", Path[3]);
 	while (chars != EOF)
 	{
 		write(1, "$ ", 2);
