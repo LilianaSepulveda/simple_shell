@@ -9,9 +9,11 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include <errno.h>
+#include <sys/stat.h>
 
 extern char **environ;
 int _strlen(char *str);
+char **count_tok(char *command);
 int _putchar(char c);
 int _strcmp(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);
