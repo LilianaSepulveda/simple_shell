@@ -10,11 +10,7 @@ int main(void)
 	struct stat st;
 	pid_t _fork;
 
-	Path = getpath(environ);
-	printf("%s\n", Path[0]);
-	printf("%s\n", Path[1]);
-	printf("%s\n", Path[2]);
-	printf("%s\n", Path[3]);
+	Path = getpath();
 	while (chars != EOF)
 	{
 		write(1, "$ ", 2);
@@ -38,6 +34,7 @@ int main(void)
 		}
 		printf("%s\n", command[0]);
 	}
+	free(Path);
 	free(command);
 	free(buff);
 	return (0);
