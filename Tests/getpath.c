@@ -24,7 +24,7 @@ char *retarray(void)
 
 	while (environ[i] != NULL)
 	{
-		if (!_strncmp(environ[i], path))/*create our own strncmp*/
+		if (!_strncmp(environ[i], path))
 		{
 			for (j = 0; path[j] != '\0'; j++)
 				;
@@ -41,33 +41,37 @@ char *retarray(void)
  */
 char **_strtok2(char *path)
 {
-	int i, copysize = 0, counttoken = 0;
-	char **pathtoken = NULL, *copy = NULL, *token = 0;
+    int i = 0, copysize = 0, counttoken = 0;
+    char **pathtoken = NULL, *copy = NULL, *token = NULL, *buff = NULL;
 
-	copysize = _strlen(path);
-	copy = malloc(sizeof(char) * (copysize + 1));
-	if (copy == NULL)
-	{
-		free(copy);
-		perror("Error: ");
-	}
-	copy = _strcpy(copy, path);
-	token = strtok(copy, ":");
-	while (token)
-	{
-		counttoken++;
-		token = strtok(NULL, ":");
-	}
-	pathtoken = (char **)malloc(sizeof(char *) * (counttoken + 1));
-	token = strtok(path, ":");
-	while (token)
-	{
-		pathtoken[i] = malloc(sizeof(char) * (_strlen(token + 1)));
-		_strcpy(pathtoken[i], token);
-		token = strtok(NULL, ":");
-		i++;
-	}
-	pathtoken[i] = NULL;
-	free(copy);/*free pathtoken?*/
-	return (pathtoken);
+    copysize = _strlen(path);
+    copy = malloc(sizeof(char) * (copysize + 1));
+    if (copy == NULL)
+    {
+        free(copy);
+        perror("Error: ");
+    }
+    copy = _strcpy(copy, path);
+    token = strtok(copy, ":");
+    while (token)
+    {
+        counttoken++;
+        token = strtok(NULL, ":");
+    }
+    pathtoken = malloc(sizeof(char *) * (counttoken + 1));
+        if (pathtoken == NULL)
+        {
+          free(pathtoken);
+          perror("Error: ");
+        }
+    free(copy);
+    token = strtok(path, ":");
+    while (token != NULL)
+    {
+      pathtoken[i] = token;
+      token = strtok(NULL, ":");
+      i++;
+    }
+    pathtoken[i] = NULL;
+    return(pathtoken);
 }
