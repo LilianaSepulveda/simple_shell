@@ -4,11 +4,11 @@
  *@env: enviroment
  *Return: An array of trings tokenized
  */
-char **getpath(char **env)
+char **getpath(void)
 {
 	char *ptr = NULL, **ptrtoken = NULL;
 
-	ptr = retarray(env);
+	ptr = retarray();
 	ptrtoken = _strtok2(ptr);
 	return (ptrtoken);
 }
@@ -17,21 +17,22 @@ char **getpath(char **env)
  *@env: enviroment
  *Return: the string of all path
  */
-char *retarray(char **env)
+char *retarray(void)
 {
-	int i = 0;
-	char *ptr = NULL;
+	int i = 0, j;
+	char *ptr = NULL, *path = "PATH=";
 
-	while (env[i] != NULL)
+	while (environ[i] != NULL)
 	{
-		if (_strncmp(env[i] != NULL))/*create our own strncmp*/
+		if (!_strncmp(environ[i], path))/*create our own strncmp*/
 		{
-			ptr = _strncmp(env[i]);
-			return (ptr);
+			for (j = 0; path[j] != '\0'; j++)
+				;
+			ptr = (environ[i] + j);
 		}
 		i++;
 	}
-	return (NULL);
+	return (ptr);
 }
 /**
  *_strtok2 - tokenizes the path
