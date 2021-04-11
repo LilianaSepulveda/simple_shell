@@ -4,16 +4,22 @@
  * @env:given string
  * Return: String modified by 5 positions.
  */
-char *_strncmp(char *env)
+int _strncmp(char *s1, char *s2)
 {
-	int i;
-	char PATH[] = "PATH=", *strncmp = NULL;
+	int i = 0, h = 0, g = 0;
+	char *strncmp = NULL;
 
-	for (i = 0; i <= 4; i++)
+	while (s2[h] != '\0')
 	{
-		if (env[i] != PATH[i])
-			return(NULL);
+		h++;
 	}
-	strncmp = env[i] + 5;
-	return (strncmp);
+	while(i < h)
+	{
+		if (s1[i] != s2[i])
+			g++;
+		i++;
+	}
+	if (g != 0)
+		return (-1);
+	return (0);
 }
