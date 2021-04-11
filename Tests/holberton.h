@@ -21,5 +21,6 @@ int _strncmp(char *s1, char *s2);
 char **getpath(void);
 char *retarray(void);
 char **_strtok2(char *path);
+char **add_command(char *command, char **path);
 
 #endif
