@@ -41,7 +41,7 @@ char *retarray(void)
  */
 char **_strtok2(char *path)
 {
-    int i = 0, copysize = 0, counttoken = 0;
+    int i = 0, b = 0, copysize = 0;
     char **pathtoken = NULL, *copy = NULL, *token = NULL, *buff = NULL;
 
     copysize = _strlen(path);
@@ -52,26 +52,41 @@ char **_strtok2(char *path)
         perror("Error: ");
     }
     copy = _strcpy(copy, path);
-    token = strtok(copy, ":");
-    while (token)
+    while (path[b] != '\0')
     {
-        counttoken++;
-        token = strtok(NULL, ":");
+      if (path[b] == ':')
+        b++;
     }
-    pathtoken = malloc(sizeof(char *) * (counttoken + 1));
-        if (pathtoken == NULL)
-        {
-          free(pathtoken);
-          perror("Error: ");
-        }
-    free(copy);
-    token = strtok(path, ":");
+    pathtoken = malloc(sizeof(char *) * (b + 1));
+      if (pathtoken == NULL)
+      {
+        free(pathtoken);
+        perror("Error: ");
+      }
+    token = strtok(copy, ":");
     while (token != NULL)
     {
       pathtoken[i] = token;
-      token = strtok(NULL, ":");
       i++;
+      token = strtok(NULL, ":");
     }
+    free(copy);
     pathtoken[i] = NULL;
     return(pathtoken);
 }
+/*int main(void)
+{
+  char path[] = "/home/yael/.vscode-server/bin/08a217c4d27a02a5bcde898fd7981bda5b49391b/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Windows/system32";
+  char **strtokenized = NULL;
+
+  strtokenized = _strtok2(path);
+  printf("%s\n", strtokenized[0]);
+  printf("%s\n", strtokenized[1]);
+  printf("%s\n", strtokenized[2]);
+  printf("%s\n", strtokenized[3]);
+  printf("%s\n", strtokenized[4]);
+  printf("%s\n", strtokenized[5]);
+  printf("%s\n", strtokenized[6]);
+
+  return(0);
+}*/

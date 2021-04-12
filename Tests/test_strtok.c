@@ -11,8 +11,7 @@ int main(void)
 	char *chao = "exit\n";
 	char *token = NULL;
 
-	printf("Use CTRL + D or type 'exit' to exit:\n");
-   	while(1)
+	while(1)
 	{
     	printf("$");
     	chars = getline(&buff,&bufsize,stdin);
