@@ -1,13 +1,12 @@
 #include "holberton.h"
 /**
  * _strncmp - compares two strings
- * @env:given string
+ *@s1: given string
  * Return: String modified by 5 positions.
  */
 int _strncmp(char *s1, char *s2)
 {
 	int i = 0, h = 0, g = 0;
-	char *strncmp = NULL;
 
 	while (s2[h] != '\0')
 	{

@@ -6,9 +6,8 @@
 int main(void)
 {
 	ssize_t chars = 0, buffsize = 0;
-	char *buff = NULL, **command = NULL, **Path = NULL;
-	struct stat st;
-	pid_t _fork;
+	char *buff = NULL, **command = NULL, **Path = NULL, **tpath = NULL, **fullpath = NULL;
+	int _forky = 0;
 
 	Path = getpath();
 	while (chars != EOF)
@@ -21,18 +20,10 @@ int main(void)
 		if (buff[0] == '\0')
 			continue;
 		command = count_tok(buff);
-		_fork = fork();
-		if (_fork != 0)
-			wait(0);
-		if (_fork == 0)
-		{
-			if (stat(command[0], &st) == 0)
-				if (execve(command[0], command, environ) == -1)
-					perror("Error: ");
-			free(command);
-			exit(127);
-		}
-		printf("%s\n", command[0]);
+		tpath = Path;
+		fullpath = add_command(command[0],tpath);
+		_forky = _fork(fullpath, tpath);
+		
 	}
 	free(Path);
 	free(command);
