@@ -13,14 +13,12 @@ int main(void)
 	int _forky = 0, i = 0;
 	pid_t pid;
 	struct stat st;
-	/**
-	/*Path = getpath();
-	/*if (isatty(STDIN_FILENO) != 1)  this is becauseif issaty returns 1 it is a
+
+	if (isatty(STDIN_FILENO) != 1)/*this is becauseif issaty returns 1 it is a*/
 	{/*fd reffering to a terminal*/
-	/*	no_interactive(Path);/*go to a function to execute the command
-	/*	free(Path); /*it's already used, so we can end this process
-	/*	return (0);
-	}*/
+		no_interactive();/*go to a function to execute the command*/
+		return (0);
+	}
 	while (chars != EOF)
 	{
 		write(1, "$ ", 2);
@@ -32,8 +30,10 @@ int main(void)
 			continue;
 		command = count_tok(buff);
 		if (_fork(command) == -1) ;
-		{free_tokens(command), free(buff), continue;}
-		free(command);
+		{
+			free_tokens(command);
+			continue;
+		}
 	}
 	free(buff);
 	return (0);
