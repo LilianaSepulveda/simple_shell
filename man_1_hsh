@@ -1,0 +1,93 @@
+.TH man 1 "April 14th 2021" "0.01" "Simple Shell, Holberton School"
+.SH NAME
+.B Simple Shell
+- A command line interpreter
+.SH SYNOPSIS
+.B $ [command] - [options] [arguments]
+.sp
+.SH DESCRIPTION
+This simple shell simulates the behavior of an unix shell
+.B
+.sp
+This program was created by first trimester @ Holberton School (med-0121).
+.sp
+.B Run:
+.RS
+The program is compiled with the following command:
+.sp
+.B gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+.sp
+To execute the program:
+.sp
+.B ./hsh
+.RE
+.sp
+.B Overview:
+.RS
+Simple shell interpretates commands passed by the standard input, this generates a child process with the system call fork(), in it, the system call execve() will be summoned, that's the one in charge of executing the program pointed to by filename, The arguments for execve() are an array of strings tokenized from the input,
+and the environment variables in case it's commanded with the full path on command[0], or with a tokenized PATH, by adding the command to such lines in PATH.
+The child process will be replaced by the execution of the command, and the program will return to the parent process.
+.RE
+.sp
+.SH SYNTAX
+$ <command> <flags or options> <argument 1> <argument 2> ...
+.RE
+.sp
+OR NON-INTERACTIVE MODE:
+.RE
+.sp
+$ <command> | ./hsh
+.SS
+.I echo
+followed by the command in double quotes into ./hsh. This mode doesn't print a prompt and executes the command directly.
+.RE
+.SS
+Interactive mode:
+<command>
+.SS
+EXAMPLES:
+.SS
+$ pwd
+Prints the absolute path of the current directory
+.SS
+$ ls -la --author
+will show a list of all files including hidden files of the current directory in long format with the authors of each file
+.SS
+$ cat filename
+Will display the content of filename
+.SS
+Non-interactive mode:
+.RE
+.sp
+EXAMPLE:
+$ echo "ls -l" | ./hsh
+.sp
+.RE
+Will show the list of all files in current directory in a long format, in non-interactive mode
+.sp
+.B Path search:
+.RS
+The PATH environment variable is a colon-delimited list of directories that your shell searches through when you enter a command.
+
+Program files (executables) are kept in many different places on the Unix system. Your path tells the Unix shell where to look on the system when you request a particular program.
+ If it doesn't find it, it searches for a builtin by that name.
+If it's not a built-in, and the command is the full name of an executable, like /bin/ls, it will be executed.
+.RE
+.sp
+.B Builtins:
+.RS
+Simple Shell has two built-ins that simulate the real shell built-ins.
+.sp
+.RS
+.B - exit [status]:
+exits the program with an exit status of the value specified as an argument by the user.
+.sp
+.B - env:
+Prints the environment variables listed to the standard output.
+.sp
+.SH SEE ALSO
+execve(2), _exit(2), exit(3), fflush(3), fork(2), free(3), isatty(3), malloc(3), open(2), read(2), environ(7).
+.SH BUGS
+Simple shell only simulates original shell's behavior and has not implemented many regular shell builtins, so if you try to run them, you willll get an error message.
+.SH AUTHORS
+Liliana Sepúlveda Lindarte, Yael Uribe.
