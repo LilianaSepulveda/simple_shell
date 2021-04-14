@@ -16,7 +16,7 @@ int _strlen(char *str);
 char **count_tok(char *command);
 int _putchar(char c);
 int _strcmp(char *s1, char *s2);
-int _fork(char **fullpath, char **tpath);
+int _fork(char **command);
 char *_strcpy(char *dest, char *src);
 int _strncmp(char *s1, char *s2);
 char **getpath(void);
@@ -24,6 +24,7 @@ char *retarray(void);
 char **_strtok2(char *path);
 char **add_command(char *command, char **path);
 char *str_concat(char *s1, char *s2);
-void free_tokens(char ** tok_2free)
+void free_tokens(char ** tok_2free);
+void no_interactive(void);
 
 #endif
