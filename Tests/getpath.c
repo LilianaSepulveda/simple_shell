@@ -1,10 +1,9 @@
 #include "holberton.h"
 /**
  *getpath - function to get PATH and tokenize it
- *@env: enviroment
  *Return: An array of trings tokenized
  */
-char **getpath(void)
+/*char **getpath(void)
 {
 	char *ptr = NULL, **ptrtoken = NULL;
 
@@ -14,10 +13,9 @@ char **getpath(void)
 }
 /**
  *retarray - function get an array
- *@env: enviroment
  *Return: the string of all path
  */
-char *retarray(void)
+/*char *retarray(void)
 {
 	int i = 0, j;
 	char *ptr = NULL, *path = "PATH=";
@@ -41,52 +39,47 @@ char *retarray(void)
  */
 char **_strtok2(char *path)
 {
-    int i = 0, b = 0, copysize = 0;
-    char **pathtoken = NULL, *copy = NULL, *token = NULL, *buff = NULL;
+	int i = 0, b = 0, copysize = 0;
+	char **pathtoken = NULL, *copy = NULL, *token = NULL, *copy2 = NULL;
 
-    copysize = _strlen(path);
-    copy = malloc(sizeof(char) * (copysize + 1));
-    if (copy == NULL)
-    {
-        free(copy);
-        perror("Error: ");
-    }
-    copy = _strcpy(copy, path);
-    while (path[b] != '\0')
-    {
-      if (path[b] == ':')
-        b++;
-    }
-    pathtoken = malloc(sizeof(char *) * (b + 1));
-      if (pathtoken == NULL)
-      {
-        free(pathtoken);
-        perror("Error: ");
-      }
-    token = strtok(copy, ":");
-    while (token != NULL)
-    {
-      pathtoken[i] = token;
-      i++;
-      token = strtok(NULL, ":");
-    }
-    free(copy);
-    pathtoken[i] = NULL;
-    return(pathtoken);
+	while (path[i] != '\0')
+	{
+		if(':' == path[i])
+		{
+			b++;
+			i++;
+		}
+		i++;
+	}
+	pathtoken = malloc(sizeof(char *) * (b + 1));
+	if (pathtoken == NULL)
+	{
+		free(pathtoken);
+		perror("Error:");
+	}
+	copy = _strcpy(copy, path);
+	token = strtok(copy, ":");
+	i = 0;
+	while (token)
+	{
+		pathtoken[i] = _strcpy(pathtoken[i], token);
+		token = strtok(NULL, ":");
+		i++;
+	}
+	pathtoken[i] = NULL;
+	free(copy);
+	return (pathtoken);
 }
-/*int main(void)
+/**
+ * free_tokens - function to free tokens
+ * @tok_2free: array to free
+ * Return - void
+ */
+void free_tokens(char ** tok_2free)
 {
-  char path[] = "/home/yael/.vscode-server/bin/08a217c4d27a02a5bcde898fd7981bda5b49391b/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Windows/system32";
-  char **strtokenized = NULL;
+	int i = 0;
 
-  strtokenized = _strtok2(path);
-  printf("%s\n", strtokenized[0]);
-  printf("%s\n", strtokenized[1]);
-  printf("%s\n", strtokenized[2]);
-  printf("%s\n", strtokenized[3]);
-  printf("%s\n", strtokenized[4]);
-  printf("%s\n", strtokenized[5]);
-  printf("%s\n", strtokenized[6]);
-
-  return(0);
-}*/
+	while(tok_2free[i])
+		free(tok_2free[i++]);
+	free(tok_2free);
+}
