@@ -7,8 +7,8 @@
  */
 char **add_command(char *command, char **path)
 {
-	int lcomm = 0, larr = 0, i, j, k, nparr = 0;
-	char **add_command = NULL;
+	int lcomm = 0, larr = 0, i, j, k = 0, nparr = 0;
+	char **add_command = NULL, **aux = NULL, *au = NULL;
 
 	/*aux = malloc(sizeof(char *) * (sizeof(path) + sizeof(command) + 1));
 	for(i  = 0; path[i] != NULL; i++)
@@ -26,21 +26,10 @@ char **add_command(char *command, char **path)
 	while (path[nparr] != NULL)
 		nparr++;/*n of pointers in the array*/
 	add_command = (char **)malloc(sizeof(char*) * (nparr + 1));/*malloc for a char** */
-	if (add_command == NULL)
-	{
-		free(add_command);
-		perror("Error: ");
-	}
 	for (i = 0; path[i] != NULL; i++)/*to scroll path*/
 	{
-		k = 0;
 		larr = _strlen(path[i]);/*length of array in pos i of the array*/
 		add_command[i] = malloc(sizeof(char) * (larr + 1));/* malloc to give enough space in each string*/
-		if (add_command[i] = NULL)
-		{
-			free(add_command);
-			perror("Error: ");
-		}
 		for(j = 0; j <= (lcomm + larr); j++)/*scroll strings*/
 		{
 			if (j < larr)/*fills each position from path string*/
@@ -58,7 +47,7 @@ char **add_command(char *command, char **path)
 	add_command[i] = NULL;
 	return (add_command);
 }
-/*int main(void)
+int main(void)
 {
 	char command[] = "ls", **path = NULL, **received = NULL;
 
@@ -76,4 +65,3 @@ char **add_command(char *command, char **path)
 	free(path);
 	return(0);
 }
-*/
