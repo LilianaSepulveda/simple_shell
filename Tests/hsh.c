@@ -1,43 +1,40 @@
 #include "holberton.h"
+
 /**
  * main - entry point
  * Return: 0 on success
  */
+
 int main(void)
 {
-	ssize_t chars = 0, buffsize = 0;
-	char *buff = NULL, **command = NULL, **path2 = NULL, **Path = NULL, **tpath = NULL, **fullpath = NULL;
-	int _forky = 0;
+	ssize_t chars = 0;
+	size_t buffsize = 0;
+	char *buff = NULL, **command = NULL, **Path = NULL, **tpath = NULL, **fullpath = NULL;
+	int _forky = 0, i = 0;
 	pid_t pid;
 	struct stat st;
-
-	Path = getpath();
+	/**
+	/*Path = getpath();
+	/*if (isatty(STDIN_FILENO) != 1)  this is becauseif issaty returns 1 it is a
+	{/*fd reffering to a terminal*/
+	/*	no_interactive(Path);/*go to a function to execute the command
+	/*	free(Path); /*it's already used, so we can end this process
+	/*	return (0);
+	}*/
 	while (chars != EOF)
 	{
 		write(1, "$ ", 2);
 		chars = getline(&buff, &buffsize, stdin);
-		if (chars == EOF)
+		if (chars == EOF)/*exits with EOF (CTRL+D)*/
 			break;
 		buff[chars - 1] = '\0';
 		if (buff[0] == '\0')
 			continue;
 		command = count_tok(buff);
-		tpath = Path;
-		/*fullpath = add_command(command[0], tpath);*/
-		_forky = fork();
-		if (_forky != 0)
-			wait(0);
-		if (_forky == 0)
-		{
-			if (stat(command[0], &st) == 0)
-				if (execve(command[0], command, environ))
-					perror("Error: ");
-			free(command);
-			exit(127);
-		}
-
+		if (_fork(command) == -1) ;
+		{free_tokens(command), free(buff), continue;}
+		free(command);
 	}
-	free(command);
 	free(buff);
 	return (0);
 }
