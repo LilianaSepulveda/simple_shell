@@ -3,7 +3,7 @@
  *getpath - function to get PATH and tokenize it
  *Return: An array of trings tokenized
  */
-/*char **getpath(void)
+char **getpath(void)
 {
 	char *ptr = NULL, **ptrtoken = NULL;
 
@@ -15,7 +15,7 @@
  *retarray - function get an array
  *Return: the string of all path
  */
-/*char *retarray(void)
+char *retarray(void)
 {
 	int i = 0, j;
 	char *ptr = NULL, *path = "PATH=";
@@ -44,7 +44,7 @@ char **_strtok2(char *path)
 
 	while (path[i] != '\0')
 	{
-		if(':' == path[i])
+		if (':' == path[i])
 		{
 			b++;
 			i++;
@@ -75,11 +75,11 @@ char **_strtok2(char *path)
  * @tok_2free: array to free
  * Return - void
  */
-void free_tokens(char ** tok_2free)
+void free_tokens(char **tok_2free)
 {
 	int i = 0;
 
-	while(tok_2free[i])
+	while (tok_2free[i])
 		free(tok_2free[i++]);
 	free(tok_2free);
 }
