@@ -2,6 +2,7 @@
 /**
  * _strncmp - compares two strings
  *@s1: given string
+ *@s2: string to compare with s1
  * Return: String modified by 5 positions.
  */
 int _strncmp(char *s1, char *s2)
