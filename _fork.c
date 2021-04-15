@@ -10,7 +10,7 @@ int _fork(char **command)
 	aux = strdup(command[0]);
 	while (aux[z] != '\0')
 	{
-		if(aux[z] == '\n')
+		if (aux[z] == '\n')
 			aux[z] = '\0';
 		z++;
 	}
@@ -20,13 +20,13 @@ int _fork(char **command)
 	{
 		if (command[0][0] == '/')
 		{
-			if (execve(aux, command, environ) == -1);
+			if (execve(aux, command, environ) == -1)
 			{
 				perror("Error: command not found");
 				return (-1);
 			}
 		}
-		else if(command[0][0] != '/')
+		else if (command[0][0] != '/')
 		{
 			path = getpath();
 			fullpath = add_command(command[0], path);
