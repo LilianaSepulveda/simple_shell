@@ -12,7 +12,7 @@ int _strncmp(char *s1, char *s2)
 	{
 		h++;
 	}
-	while(i < h)
+	while (i < h)
 	{
 		if (s1[i] != s2[i])
 			g++;
