@@ -24,7 +24,7 @@ char *retarray(void);
 char **_strtok2(char *path);
 char **add_command(char *command, char **path);
 char *str_concat(char *s1, char *s2);
-void free_tokens(char ** tok_2free);
+void free_tokens(char **tok_2free);
 void no_interactive(void);
 
 #endif
