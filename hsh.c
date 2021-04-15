@@ -9,7 +9,7 @@ int main(void)
 {
 	ssize_t chars = 0;
 	size_t buffsize = 0;
-	char *buff = NULL, **command = NULL, **Path = NULL, **tpath = NULL, **fullpath = NULL;
+	char *buff = NULL, **command = NULL;
 	int _forky = 0, i = 0;
 	pid_t pid;
 	struct stat st;
@@ -29,7 +29,7 @@ int main(void)
 		if (buff[0] == '\0')
 			continue;
 		command = count_tok(buff);
-		if (_fork(command) == -1) ;
+		if (_fork(command) == -1)
 		{
 			free_tokens(command);
 			continue;
