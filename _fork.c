@@ -1,4 +1,9 @@
 #include "holberton.h"
+/**
+ * _fork - Function to fork and execute command line
+ * @command: Command line tokenized to be executed
+ * Return: 0 if success -1 if went wrong
+ */
 
 int _fork(char **command)
 {
