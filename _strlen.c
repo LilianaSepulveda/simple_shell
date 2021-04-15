@@ -1,12 +1,12 @@
 #include "holberton.h"
 /**
- * _strlen - Function to determine the length of a string
+ * _strlen - Fnction to determine the length of a string
  * @str: String
  * Return: Length of the string
  */
 int _strlen(char *str)
 {
-	int i;
+	int i = 0;
 
 	for (i = 0; str[i] != '\0'; i++)
 		;
