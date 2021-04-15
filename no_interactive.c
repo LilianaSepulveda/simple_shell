@@ -7,10 +7,10 @@ void no_interactive(void)
 {
 	ssize_t chars = 0;
 	size_t buffsize = 0;
-	char *buff = NULL, **command = NULL, **printpath = NULL, *Path = NULL;
+	char *buff = NULL, **command = NULL;
 
 	chars = getline(&buff, &buffsize, stdin);
-	printf("%s\n", buff);
+	printf("%ld\n", chars);
 	command = count_tok(buff);/* to get input tokenized*/
 	_fork(command);
 	printf("%s\n", "pffff");

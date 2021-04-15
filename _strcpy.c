@@ -7,10 +7,13 @@
  */
 char *_strcpy(char *dest, char *src)
 {
-	int i, j = 0, copysize = 0;
+	int i, j = 0, copysize = 0, copysize2 = 0;
 	char *copy = NULL;
 
 	copysize = _strlen(src);
+	copysize2 = _strlen(dest);
+	while (dest[copysize2])
+		continue;
 	copy = malloc(sizeof(char) * (copysize + 1));
 	if (copy == NULL)
 	{

@@ -9,7 +9,7 @@ int _fork(char **command)
 {
 	pid_t pid;
 	struct stat st;
-	int i = 0, x = -1, z = 0;
+	int  z = 0;
 	char **path = NULL, **fullpath = NULL, *aux = NULL;
 
 	aux = strdup(command[0]);
@@ -25,10 +25,13 @@ int _fork(char **command)
 	{
 		if (command[0][0] == '/')
 		{
-			if (execve(aux, command, environ) == -1)
+			if (stat(command[0], &st) == 0)
 			{
-				perror("Error: command not found");
-				return (-1);
+				if (execve(aux, command, environ) == -1)
+				{
+					perror("Error: command not found");
+					return (-1);
+				}
 			}
 		}
 		else if (command[0][0] != '/')
@@ -43,4 +46,5 @@ int _fork(char **command)
 		}
 		exit(127);
 	}
+	return(0);
 }

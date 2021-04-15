@@ -39,8 +39,8 @@ char *retarray(void)
  */
 char **_strtok2(char *path)
 {
-	int i = 0, b = 0, copysize = 0;
-	char **pathtoken = NULL, *copy = NULL, *token = NULL, *copy2 = NULL;
+	int i = 0, b = 0;
+	char **pathtoken = NULL, *copy = NULL, *token = NULL;
 
 	while (path[i] != '\0')
 	{
