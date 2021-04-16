@@ -5,35 +5,42 @@
  */
 void no_interactive(void)
 {
-	ssize_t chars = 0;
 	size_t buffsize = 0;
 	char *buff = NULL, **command = NULL;
 	pid_t pid;
 	struct stat st;
+	int i = 0;
 
-	chars = getline(&buff, &buffsize, stdin);
-	buff[chars - 1] = '\0';
-	printf("%s\n", buff);
-	printf("%ld\n", chars);
-	command = count_tok(buff);/* to get input tokenized*/
-	pid = fork();
-	wait(NULL);
-	if (pid == 0)
+	while (getline(&buff, &buffsize, stdin) != EOF)
 	{
-		if (stat(command[0], &st) == 0)
+		i = 0;
+		while (buff[i])
 		{
-			if (execve(command[0], command, environ) == -1)
-			{
-				free(command);
-				free(buff);
-				perror("Error: command not found ./hsh");
-				return;
-			}
+			if (buff[i] == '\n')
+				buff[i] = '\0';
+			i++;
 		}
-		perror("Error: ");
-		free(command);
-		exit(127);
+		command = count_tok(buff);/* to get input tokenized*/
+		pid = fork();
+		wait(NULL);
+		if (pid == 0)
+		{
+			if (stat(command[0], &st) == 0)
+			{
+				if (execve(command[0], command, environ) == -1)
+				{
+					free_tokens(command);
+					free(buff);
+					perror("Error: command not found ./hsh");
+					return;
+				}
+			}
+			perror("Error: ");
+			free_tokens(command);
+			exit(127);
+		}
+		free_tokens(command);
+		command = NULL;
 	}
-	free_tokens(command);
 	free(buff);
 }

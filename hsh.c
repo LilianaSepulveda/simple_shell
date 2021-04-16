@@ -13,12 +13,13 @@ int main(void)
 	pid_t pid;
 	struct stat st;
 
-
+	if (isatty(STDIN_FILENO) != 1)/*this is becauseif issaty returns 1 it is a*/
+	{
+		no_interactive();/*go to a function to execute the command*/
+		return (0);
+	}
 	while (chars != EOF)
 	{
-		if (isatty(STDIN_FILENO) != 1)/*this is becauseif issaty returns 1 it is a*/
-		{	no_interactive();/*go to a function to execute the command*/
-			return (0);	}
 		write(1, "$ ", 2);
 		fflush(stdin);
 		chars = getline(&buff, &buffsize, stdin);
