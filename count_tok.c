@@ -29,9 +29,10 @@ char **count_tok(char *command)
 	i = 0;
 	while (token != NULL)
 	{
-		array[i] = token;
-		i++;
+		array[i] = _strcpy(token);
 		token = strtok(NULL, " ");
+		i++;
+
 	}
 	array[i] = NULL;
 	return (array);

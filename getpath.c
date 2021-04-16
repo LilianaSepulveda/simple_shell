@@ -57,12 +57,12 @@ char **_strtok2(char *path)
 		free(pathtoken);
 		perror("Error:");
 	}
-	copy = _strcpy(copy, path);
+	copy = _strcpy(path);
 	token = strtok(copy, ":");
 	i = 0;
 	while (token)
 	{
-		pathtoken[i] = _strcpy(pathtoken[i], token);
+		pathtoken[i] = _strcpy(token);
 		token = strtok(NULL, ":");
 		i++;
 	}

@@ -9,10 +9,10 @@ int _fork(char **command)
 {
 	pid_t pid;
 	struct stat st;
-	int  z = 0;
-	char **path = NULL, **fullpath = NULL, *aux = NULL;
+	int  z = 0/*, i = 0*/;
+	char *aux = NULL;
 
-	aux = strdup(command[0]);
+	aux = _strcpy(command[0]);
 	while (aux[z] != '\0')
 	{
 		if (aux[z] == '\n')
@@ -23,28 +23,16 @@ int _fork(char **command)
 	wait(NULL);
 	if (pid == 0)
 	{
-		if (command[0][0] == '/')
+		if (stat(command[0], &st) == 0)
 		{
-			if (stat(command[0], &st) == 0)
+			if (execve(command[0], command, environ) == -1)
 			{
-				if (execve(aux, command, environ) == -1)
-				{
-					perror("Error: command not found");
-					return (-1);
-				}
-			}
-		}
-		else if (command[0][0] != '/')
-		{
-			path = getpath();
-			fullpath = add_command(command[0], path);
-			if (execve(fullpath[0], command, environ) == -1)
-			{
-				perror("Error: command not found");
+				perror("Error: command not found ./hsh");
 				return (-1);
 			}
 		}
+		free(command);
 		exit(127);
 	}
-	return(0);
+	return (0);
 }

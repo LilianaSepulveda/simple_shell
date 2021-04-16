@@ -1,19 +1,15 @@
 #include "holberton.h"
 /**
  * _strcpy - Makes a copy of a string into another
- * @dest: Destination string
  * @src: String to copy
  * Return: The destination string
  */
-char *_strcpy(char *dest, char *src)
+char *_strcpy(char *src)
 {
-	int i, j = 0, copysize = 0, copysize2 = 0;
+	int i, j = 0, copysize = 0;
 	char *copy = NULL;
 
 	copysize = _strlen(src);
-	copysize2 = _strlen(dest);
-	while (dest[copysize2])
-		continue;
 	copy = malloc(sizeof(char) * (copysize + 1));
 	if (copy == NULL)
 	{
