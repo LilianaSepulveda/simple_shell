@@ -17,7 +17,7 @@ char **count_tok(char *command);
 int _putchar(char c);
 int _strcmp(char *s1, char *s2);
 int _fork(char **command);
-char *_strcpy(char *dest, char *src);
+char *_strcpy(char *src);
 int _strncmp(char *s1, char *s2);
 char **getpath(void);
 char *retarray(void);
